@@ -7,7 +7,9 @@ This Python script matches random geolocation points (latitude, longitude) from 
 
 ### Features
 __Random Geolocation Generation:__ Generates two random valid GPS coordinates arrays.
+
 __Distance Calculation:__ Uses the Haversine formula to calculate the distance between two GPS points.
+
 __Closest Point Matching:__ Matches each point in one array to the closest point in the other array.
 
 ### How It Works
