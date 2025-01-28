@@ -139,6 +139,6 @@ def main():
     else:
         print("One or both arrays are empty. Please check your input.")
 
-# Guard to ensure the script only runs interactively when executed directly
+# Guard to ensure the script only runs interactively when executed directly. This ensures pytest runs smoothly
 if __name__ == "__main__":
     main()

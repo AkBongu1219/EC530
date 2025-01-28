@@ -3,7 +3,7 @@ from EC530_HW2.EC530_2 import haversine, validate_coordinate, match_closest_poin
 
 class TestGeolocationFunctions(unittest.TestCase):
     def test_haversine(self):
-        # Correct the expected distance to match the function's output
+        # Expected distance should match the function's output
         self.assertAlmostEqual(haversine(12.9716, 77.5946, 13.0827, 80.2707), 290.17, places=2)
 
         # Test invalid input handling
@@ -26,8 +26,6 @@ class TestGeolocationFunctions(unittest.TestCase):
         array1 = [(12.9716, 77.5946), (28.7041, 77.1025)]
         array2 = [(13.0827, 80.2707), (22.5726, 88.3639)]
         matches = match_closest_points(array1, array2)
-
-        # Correct the expected distance to 290.17 instead of 291.93
         self.assertAlmostEqual(matches[0][2], 290.17, places=2)
 
         # Test first point matches
