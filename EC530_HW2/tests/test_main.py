@@ -1,5 +1,5 @@
 import unittest
-from EC530_2 import haversine, validate_coordinate, match_closest_points
+from EC530_HW2.EC530_2 import haversine, validate_coordinate, match_closest_points
 
 class TestGeolocationFunctions(unittest.TestCase):
     def test_haversine(self):
