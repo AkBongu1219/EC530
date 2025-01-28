@@ -119,37 +119,8 @@ EC530_HW2/
 ├── tests/
 │   └── test_main.py          # Unit tests for the script
 ├── README.md                 # This file
-└── requirements.txt          # List of dependencies
 ```
 
 ---
 
-## Contributing
-Contributions are welcome! If you'd like to contribute, please follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Commit your changes and push to the branch.
-4. Submit a pull request with a detailed description of your changes.
 
----
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Acknowledgments
-- The Haversine formula implementation is based on the standard formula for calculating great-circle distances.
-- Thanks to the Python community for providing excellent libraries and tools.
-
----
-
-## Contact
-For questions or feedback, please contact:
-- **Your Name**  
-- **Email**: your.email@example.com  
-- **GitHub**: [your-username](https://github.com/your-username)
-
----
-
-This README provides a clear and professional overview of your project, making it easy for users and contributors to understand and use your code. Let me know if you need further adjustments!
