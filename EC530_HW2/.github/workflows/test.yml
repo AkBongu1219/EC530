@@ -22,4 +22,4 @@ jobs:
           pip install pytest pandas
       - name: Run unit tests
         run: |
-          pytest
+          pytest EC530_HW2/tests
