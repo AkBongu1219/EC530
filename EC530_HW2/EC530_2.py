@@ -113,18 +113,32 @@ def manual_input_coordinates():
     
     return array1, array2
 
-# Example usage:
-# You can choose between manually entering coordinates or reading from CSV files
+# Main function to run the script interactively
+def main():
+    print("Choose an option:")
+    print("1. Manually input coordinates")
+    print("2. Read coordinates from CSV files")
+    choice = input("Enter your choice (1 or 2): ")
 
-# Option 1: Manually input coordinates for testing
-array1, array2 = manual_input_coordinates()
+    if choice == "1":
+        array1, array2 = manual_input_coordinates()
+    elif choice == "2":
+        file1 = input("Enter the path to the first CSV file: ")
+        file2 = input("Enter the path to the second CSV file: ")
+        array1 = read_coordinates_from_csv(file1)
+        array2 = read_coordinates_from_csv(file2)
+    else:
+        print("Invalid choice. Exiting.")
+        return
 
-# Option 2: Read coordinates from CSV files for dynamic testing
-# Uncomment the next line if you want to test CSV-based matching
-# match_points_from_csv('coordinates1.csv', 'coordinates2.csv')
+    if array1 and array2:
+        print("\nClosest Point Matches:")
+        matches = match_closest_points(array1, array2)
+        for point1, closest_point, distance in matches:
+            print(f"Point {point1} is closest to {closest_point} with distance: {distance:.2f} km")
+    else:
+        print("One or both arrays are empty. Please check your input.")
 
-# Output results
-print("\nClosest Point Matches:")
-matches = match_closest_points(array1, array2)
-for point1, closest_point, distance in matches:
-    print(f"Point {point1} is closest to {closest_point} with distance: {distance:.2f} km")
+# Guard to ensure the script only runs interactively when executed directly
+if __name__ == "__main__":
+    main()
