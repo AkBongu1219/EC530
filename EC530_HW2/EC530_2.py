@@ -1,12 +1,27 @@
+import logging
 import math
 import random
 import csv
 import pandas as pd
 import re
 
+# Configure logging
+logging.basicConfig(
+    filename="app.log",  # Log file name
+    filemode="w",  # Overwrites previous logs each run
+    level=logging.DEBUG,  # Set logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
+
+logging.info("Program started")
+
 # Haversine formula to calculate the distance between two GPS coordinates
 def haversine(lat1, lon1, lat2, lon2):
     try:
+        logging.debug(
+            f"Calculating Haversine distance between ({lat1}, {lon1}) and ({lat2}, {lon2})"
+        )
+
         # Distance between latitudes and longitudes
         dLat = (lat2 - lat1) * math.pi / 180.0
         dLon = (lon2 - lon1) * math.pi / 180.0
@@ -21,9 +36,12 @@ def haversine(lat1, lon1, lat2, lon2):
         ) * math.cos(lat2)
         rad = 6371  # Radius of Earth in kilometers
         c = 2 * math.asin(math.sqrt(a))
-        return rad * c
+        distance = rad * c
+
+        logging.info(f"Haversine distance: {distance:.2f} km")
+        return distance
     except Exception as e:
-        print(f"Error in haversine calculation: {e}")
+        logging.error(f"Error in haversine calculation: {e}")
         return None
 
 
@@ -68,22 +86,28 @@ def parse_coordinate(value):
 # Function to validate and parse input coordinates
 def validate_coordinate(coord, coord_type="latitude"):
     try:
+        logging.debug(f"Validating {coord_type}: {coord}")
+
+        # Use parse_coordinate to handle both decimal and DMS formats
         coord = parse_coordinate(coord)
+
         if coord is None:
-            return None
-        if coord_type == "latitude" and (-90 <= coord <= 90):
+            raise ValueError(f"Invalid {coord_type} format: {coord}")
+
+        if coord_type == "latitude" and -90 <= coord <= 90:
             return coord
-        elif coord_type == "longitude" and (-180 <= coord <= 180):
+        elif coord_type == "longitude" and -180 <= coord <= 180:
             return coord
         else:
-            raise ValueError(f"{coord_type.capitalize()} out of bounds: {coord}")
+            raise ValueError(f"{coord_type} out of range: {coord}")
     except ValueError as e:
-        print(f"Invalid {coord_type}: {e}")
+        logging.warning(f"Invalid {coord_type}: {e}")
         return None
 
 
 # Function to match points in array1 to the closest point in array2
 def match_closest_points(array1, array2):
+    logging.info("Matching closest points between two arrays")
     closest_points = []
     for point1 in array1:
         lat1, lon1 = point1
@@ -96,25 +120,36 @@ def match_closest_points(array1, array2):
                 min_distance = distance
                 closest_point = point2
         closest_points.append((point1, closest_point, min_distance))
+        logging.debug(
+            f"Point {point1} matched with {closest_point} at {min_distance:.2f} km"
+        )
+
+    logging.info("Matching complete")
     return closest_points
 
 
 # Function to read coordinates from CSV file and return as a list of tuples
 def read_coordinates_from_csv(file_path):
     coordinates = []
+    logging.info(f"Reading coordinates from file: {file_path}")
     try:
         with open(file_path, newline="") as csvfile:
             csvreader = csv.reader(csvfile)
             for row in csvreader:
-                if len(row) == 2:  # Ensure there are exactly two columns (lat, lon)
+                if len(row) == 2:
                     lat = validate_coordinate(row[0], "latitude")
                     lon = validate_coordinate(row[1], "longitude")
                     if lat is not None and lon is not None:
                         coordinates.append((lat, lon))
+                        logging.debug(f"Added coordinate: ({lat}, {lon})")
+                    else:
+                        logging.warning(f"Invalid coordinate skipped: {row}")
     except FileNotFoundError:
-        print(f"File not found: {file_path}")
+        logging.error(f"File not found: {file_path}")
     except Exception as e:
-        print(f"Error reading CSV file: {e}")
+        logging.critical(f"Unexpected error reading CSV: {e}")
+
+    logging.info(f"Total valid coordinates read: {len(coordinates)}")
     return coordinates
 
 

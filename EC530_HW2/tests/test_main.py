@@ -1,6 +1,17 @@
 import unittest
 import os
 import pandas as pd
+import logging
+
+# Configure logging for tests
+logging.basicConfig(
+    filename="app.log",  # Ensure logs are written to this file
+    filemode="w",  # Overwrites previous logs each run
+    level=logging.DEBUG,  # Set logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
+
+
 from EC530_HW2.EC530_2 import (
     haversine,
     validate_coordinate,
@@ -86,7 +97,9 @@ class TestGeolocationFunctions(unittest.TestCase):
 
     ### SETUP & TEARDOWN for CSV Tests ###
     def setUp(self):
-        """Create temporary CSV files for testing."""
+        """Create temporary CSV files for testing and trigger logging setup."""
+        logging.info("Test suite setup started.")  # Test logging works
+
         with open("test_valid.csv", "w") as f:
             f.write("12.9716,77.5946\n28.7041,77.1025\n")
 
@@ -122,10 +135,15 @@ class TestGeolocationFunctions(unittest.TestCase):
         """Test reading and converting DMS format coordinates from CSV."""
         coordinates = read_coordinates_from_csv("test_dms.csv")
         expected = [(45.5042, -120.2583), (-60.7556, 90.5028)]
-        self.assertAlmostEqual(coordinates[0][0], expected[0][0], places=4)
-        self.assertAlmostEqual(coordinates[0][1], expected[0][1], places=4)
-        self.assertAlmostEqual(coordinates[1][0], expected[1][0], places=4)
-        self.assertAlmostEqual(coordinates[1][1], expected[1][1], places=4)
+
+        # Debugging logs to check what was read
+        print(f"Read coordinates: {coordinates}")
+
+        self.assertEqual(len(coordinates), len(expected))  # Ensure correct count
+
+        for i in range(len(expected)):
+            self.assertAlmostEqual(coordinates[i][0], expected[i][0], places=4)
+            self.assertAlmostEqual(coordinates[i][1], expected[i][1], places=4)
 
     ### TEST Dataframe Generation ###
     def test_generate_dataframe_from_coordinates(self):
