@@ -1,0 +1,24 @@
+2025-01-30 17:49:28,083 - INFO - Program started
+2025-01-30 17:50:37,403 - INFO - Matching closest points between two arrays
+2025-01-30 17:50:37,403 - DEBUG - Calculating Haversine distance between (23.0, 23.0) and (77.0, 77.0)
+2025-01-30 17:50:37,404 - INFO - Haversine distance: 6653.82 km
+2025-01-30 17:50:37,404 - DEBUG - Calculating Haversine distance between (23.0, 23.0) and (88.0, 80.0)
+2025-01-30 17:50:37,404 - INFO - Haversine distance: 7330.12 km
+2025-01-30 17:50:37,404 - DEBUG - Calculating Haversine distance between (23.0, 23.0) and (67.0, 76.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 6095.88 km
+2025-01-30 17:50:37,405 - DEBUG - Point (23.0, 23.0) matched with (67.0, 76.0) at 6095.88 km
+2025-01-30 17:50:37,405 - DEBUG - Calculating Haversine distance between (25.0, 25.0) and (77.0, 77.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 6393.67 km
+2025-01-30 17:50:37,405 - DEBUG - Calculating Haversine distance between (25.0, 25.0) and (88.0, 80.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 7101.36 km
+2025-01-30 17:50:37,405 - DEBUG - Calculating Haversine distance between (25.0, 25.0) and (67.0, 76.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 5812.66 km
+2025-01-30 17:50:37,405 - DEBUG - Point (25.0, 25.0) matched with (67.0, 76.0) at 5812.66 km
+2025-01-30 17:50:37,405 - DEBUG - Calculating Haversine distance between (30.0, 40.0) and (77.0, 77.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 5559.89 km
+2025-01-30 17:50:37,405 - DEBUG - Calculating Haversine distance between (30.0, 40.0) and (88.0, 80.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 6502.29 km
+2025-01-30 17:50:37,405 - DEBUG - Calculating Haversine distance between (30.0, 40.0) and (67.0, 76.0)
+2025-01-30 17:50:37,405 - INFO - Haversine distance: 4756.51 km
+2025-01-30 17:50:37,405 - DEBUG - Point (30.0, 40.0) matched with (67.0, 76.0) at 4756.51 km
+2025-01-30 17:50:37,405 - INFO - Matching complete
